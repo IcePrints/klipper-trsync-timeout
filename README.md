@@ -27,39 +27,55 @@ MIT for code. Documentation may be covered by [CC BY-SA 4.0](https://creativecom
 # 📥 Klipper TRSYNC_TIMEOUT Installation Script
 
 # 🔧 Step 1: Patch Klipper's mcu.py
+```bash
 python3 ~/update_trsync_timeout.py
+```
 
 # 🗂 Step 2: Create the external config file
+```bash
 cat << EOF > /home/biqu/printer_data/config/trsync.cfg
 [mcu]
 trsync_timeout = 0.05
 EOF
+```
 
 # 🔁 Step 3: Automate Klipper updates
+```bash
 chmod +x ~/klipper/update-klipper.sh
 ~/klipper/update-klipper.sh
+```
 
 # Optional: Add a shell alias for future updates
+```bash
 echo "alias klipper-update='~/klipper/update-klipper.sh'" >> ~/.bashrc
 source ~/.bashrc
+```
 
 # 🧪 Step 4: Validate that your config is being read correctly
+```bash
 python3 ~/check_trsync_timeout.py
+```
 
 # 🧩 Step 5: (Optional) Auto-patch after Moonraker/Mainsail updates
 
 # Add post-update hook to Moonraker config
+```bash
 echo -e '[update_manager klipper]\npost_update: ~/klipper/.update-trsync-timeout.sh' >> ~/klipper/moonraker.conf
-
+```
 # Create the hook script
+```bash
 cat << 'EOS' > ~/klipper/.update-trsync-timeout.sh
 #!/bin/bash
 python3 /home/biqu/update_trsync_timeout.py
 sudo systemctl restart klipper
 EOS
+```
 
 # Make the hook executable
+```bash
 chmod +x ~/klipper/.update-trsync-timeout.sh
+```
 
 # ✅ Done! Your TRSYNC_TIMEOUT is now configurable and persistent.
+
 
