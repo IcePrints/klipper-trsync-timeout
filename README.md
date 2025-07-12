@@ -26,10 +26,13 @@ MIT for code. Documentation may be covered by [CC BY-SA 4.0](https://creativecom
 
 # 📥 Klipper TRSYNC_TIMEOUT Installation Script
 
-# 🔧 Step 1: Patch Klipper's mcu.py
+🔧 Step 1: Apply the Patch to klippy/mcu.py
+Use the included script:
+📄 Use: `update_trsync_timeout.py`
 ```bash
 python3 ~/update_trsync_timeout.py
 ```
+This modifies Klipper’s core file to read the timeout value from an external config instead of using a hardcoded number.
 
 # 🗂 Step 2: Create the external config file
 ```bash
