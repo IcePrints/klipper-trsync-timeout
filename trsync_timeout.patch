@@ -1,0 +1,21 @@
+*** klippy/mcu.py   2024-01-01 00:00:00.000000000 +0000
+--- klippy/mcu.py   2024-01-01 00:00:00.000000000 +0000
+***************
+*** 1,6 ****
+ import logging
+ import math
+ import time
+-TRSYNC_TIMEOUT = 0.025
+--- 1,11 ----
+ import logging
+ import math
+ import time
++import configparser
++
++config = configparser.ConfigParser()
++config.read('/home/biqu/printer_data/config/trsync.cfg')
++
++try:
++    TRSYNC_TIMEOUT = float(config.get('mcu', 'trsync_timeout', fallback='0.025'))
++except Exception:
++    TRSYNC_TIMEOUT = 0.025
